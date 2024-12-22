@@ -16,6 +16,13 @@
 		750DA6A12D16DB05004EBE5E /* SecondTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6A02D16DB05004EBE5E /* SecondTabViewController.swift */; };
 		750DA6A32D16DB29004EBE5E /* ThirdTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6A22D16DB29004EBE5E /* ThirdTabViewController.swift */; };
 		750DA6A52D16DB4C004EBE5E /* FourTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6A42D16DB4C004EBE5E /* FourTabViewController.swift */; };
+		750DA6A72D16F24A004EBE5E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6A62D16F24A004EBE5E /* SettingsViewController.swift */; };
+		750DA6AA2D186C8B004EBE5E /* ExtensionForCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6A92D186C8B004EBE5E /* ExtensionForCollection.swift */; };
+		750DA6AC2D186D7B004EBE5E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6AB2D186D7B004EBE5E /* DataModel.swift */; };
+		750DA6AF2D186DD8004EBE5E /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6AE2D186DD8004EBE5E /* CellView.swift */; };
+		750DA6B22D187085004EBE5E /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6B12D187085004EBE5E /* LabelView.swift */; };
+		750DA6B42D187091004EBE5E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6B32D187091004EBE5E /* ImageView.swift */; };
+		750DA6B62D187672004EBE5E /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DA6B52D187672004EBE5E /* ContentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +37,13 @@
 		750DA6A02D16DB05004EBE5E /* SecondTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTabViewController.swift; sourceTree = "<group>"; };
 		750DA6A22D16DB29004EBE5E /* ThirdTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdTabViewController.swift; sourceTree = "<group>"; };
 		750DA6A42D16DB4C004EBE5E /* FourTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourTabViewController.swift; sourceTree = "<group>"; };
+		750DA6A62D16F24A004EBE5E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		750DA6A92D186C8B004EBE5E /* ExtensionForCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionForCollection.swift; sourceTree = "<group>"; };
+		750DA6AB2D186D7B004EBE5E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		750DA6AE2D186DD8004EBE5E /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		750DA6B12D187085004EBE5E /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
+		750DA6B32D187091004EBE5E /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		750DA6B52D187672004EBE5E /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +77,10 @@
 			isa = PBXGroup;
 			children = (
 				750DA69C2D16D35E004EBE5E /* SetUp */,
-				750DA68C2D16D334004EBE5E /* MainTabBar.swift */,
+				750DA6AD2D186D81004EBE5E /* Model */,
+				750DA6B02D187056004EBE5E /* Supply */,
 				750DA69D2D16DAAC004EBE5E /* TabViews */,
+				750DA68C2D16D334004EBE5E /* MainTabBar.swift */,
 				750DA6912D16D33A004EBE5E /* Assets.xcassets */,
 				750DA6932D16D33A004EBE5E /* LaunchScreen.storyboard */,
 				750DA6962D16D33A004EBE5E /* Info.plist */,
@@ -84,12 +100,41 @@
 		750DA69D2D16DAAC004EBE5E /* TabViews */ = {
 			isa = PBXGroup;
 			children = (
-				750DA69E2D16DAD8004EBE5E /* FirstTabViewController.swift */,
+				750DA6A82D186C5F004EBE5E /* FirstTabViewController */,
 				750DA6A02D16DB05004EBE5E /* SecondTabViewController.swift */,
 				750DA6A22D16DB29004EBE5E /* ThirdTabViewController.swift */,
 				750DA6A42D16DB4C004EBE5E /* FourTabViewController.swift */,
+				750DA6A62D16F24A004EBE5E /* SettingsViewController.swift */,
 			);
 			path = TabViews;
+			sourceTree = "<group>";
+		};
+		750DA6A82D186C5F004EBE5E /* FirstTabViewController */ = {
+			isa = PBXGroup;
+			children = (
+				750DA69E2D16DAD8004EBE5E /* FirstTabViewController.swift */,
+				750DA6A92D186C8B004EBE5E /* ExtensionForCollection.swift */,
+				750DA6AE2D186DD8004EBE5E /* CellView.swift */,
+				750DA6B52D187672004EBE5E /* ContentViewController.swift */,
+			);
+			path = FirstTabViewController;
+			sourceTree = "<group>";
+		};
+		750DA6AD2D186D81004EBE5E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				750DA6AB2D186D7B004EBE5E /* DataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		750DA6B02D187056004EBE5E /* Supply */ = {
+			isa = PBXGroup;
+			children = (
+				750DA6B12D187085004EBE5E /* LabelView.swift */,
+				750DA6B32D187091004EBE5E /* ImageView.swift */,
+			);
+			path = Supply;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,13 +207,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				750DA6AF2D186DD8004EBE5E /* CellView.swift in Sources */,
 				750DA6A32D16DB29004EBE5E /* ThirdTabViewController.swift in Sources */,
 				750DA68D2D16D334004EBE5E /* MainTabBar.swift in Sources */,
 				750DA6A12D16DB05004EBE5E /* SecondTabViewController.swift in Sources */,
+				750DA6B42D187091004EBE5E /* ImageView.swift in Sources */,
+				750DA6AA2D186C8B004EBE5E /* ExtensionForCollection.swift in Sources */,
+				750DA6B62D187672004EBE5E /* ContentViewController.swift in Sources */,
+				750DA6B22D187085004EBE5E /* LabelView.swift in Sources */,
 				750DA69F2D16DAD9004EBE5E /* FirstTabViewController.swift in Sources */,
+				750DA6AC2D186D7B004EBE5E /* DataModel.swift in Sources */,
 				750DA6892D16D334004EBE5E /* AppDelegate.swift in Sources */,
 				750DA6A52D16DB4C004EBE5E /* FourTabViewController.swift in Sources */,
 				750DA68B2D16D334004EBE5E /* SceneDelegate.swift in Sources */,
+				750DA6A72D16F24A004EBE5E /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
