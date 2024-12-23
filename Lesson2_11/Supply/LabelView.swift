@@ -12,7 +12,7 @@ class LabelView: UILabel {
         super.init(frame: .zero)
         self.font = font
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.textColor = .black
+        self.textColor = .blue
         self.numberOfLines = 0
     }
     

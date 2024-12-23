@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ContentViewController: UIViewController{
+class ContentViewController: UIViewController, UIScrollViewDelegate {
     
     let ourIndent: CGFloat = 15
     let data = Card.cards
@@ -16,8 +16,13 @@ class ContentViewController: UIViewController{
     
     lazy var scrollView: UIScrollView = {
         $0.contentInsetAdjustmentBehavior = .never
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .black
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.minimumZoomScale = 1
+        $0.maximumZoomScale = 5
+        $0.alwaysBounceVertical = false
+        $0.alwaysBounceHorizontal = false
+        $0.delegate = self
         $0.addSubview(scrollViewContent)
         return $0
     }(UIScrollView())
@@ -29,9 +34,11 @@ class ContentViewController: UIViewController{
         return $0
     }(UIImageView())
     
+    lazy var magnificationLabel = LabelView(font: .systemFont(ofSize: 18, weight: .bold))
+    
     lazy var scrollViewContent: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .black
         $0.addSubviews(topImage)
         return $0
     }(UIView())
@@ -46,9 +53,11 @@ class ContentViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .black
         setContent()
         view.addSubview(scrollView)
+        view.addSubview(magnificationLabel)
+        magnificationLabel.text = "Magn.: 1"
         setupConstraint()
     }
     
@@ -73,9 +82,23 @@ class ContentViewController: UIViewController{
             scrollViewContent.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
             topImage.topAnchor.constraint(equalTo: scrollViewContent.topAnchor),
+//            topImage.centerYAnchor.constraint(equalTo: scrollViewContent.centerYAnchor),
             topImage.leadingAnchor.constraint(equalTo: scrollViewContent.leadingAnchor),
             topImage.trailingAnchor.constraint(equalTo: scrollViewContent.trailingAnchor),
             topImage.heightAnchor.constraint(equalToConstant: 250),
+            
+            magnificationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            magnificationLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            magnificationLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
+            magnificationLabel.heightAnchor.constraint(equalToConstant: 25),
         ])
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.topImage
+    }
+    
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        magnificationLabel.text = "Magn.: " + String(Int(scale))
     }
 }
