@@ -15,12 +15,10 @@ class CellView: UICollectionViewCell {
     
     lazy var screenWidth = UIScreen.main.bounds.width - 4 * ourIndent
     lazy var userImage: UIImageView = {
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapRecognize(sender: )))
-//        tapGesture.numberOfTapsRequired = 2
+
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panRecognize))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchRecognize))
         $0.isUserInteractionEnabled = true
-//        $0.addGestureRecognizer(tapGesture)
         $0.addGestureRecognizer(panGesture)
         $0.addGestureRecognizer(pinchGesture)
         $0.contentMode = .scaleAspectFill
@@ -43,9 +41,7 @@ class CellView: UICollectionViewCell {
         
     }
     
-//    @objc func tapRecognize(sender: UITapGestureRecognizer) {
-//        print("tap")
-//    }
+
     
     @objc func panRecognize(sender: UIPanGestureRecognizer) {
         guard let senderView = sender.view else { return }

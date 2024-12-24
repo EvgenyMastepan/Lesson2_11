@@ -9,11 +9,13 @@ import UIKit
 
 class SecondTabViewController: UIViewController {
     
-    //MARK: - Тут вся возня ради того, чтобы посмотреть как работает BadgeValue.
+    //MARK: - Тут вся возня элементарно ради того, чтобы посмотреть как работает BadgeValue.
+    
+    private var charNumSwitchStatus: Bool = true
     
     lazy var viewMessage: UIView = {
         $0.backgroundColor = .white
-        $0.frame = CGRect(x: 10, y: 70, width: view.frame.maxX - 20, height: view.frame.maxY - 300)
+        $0.frame = CGRect(x: 10, y: 80, width: view.frame.maxX - 20, height: view.frame.maxY - 300)
         $0.layer.cornerRadius = 30
         return $0
     }(UIView())
@@ -39,9 +41,27 @@ class SecondTabViewController: UIViewController {
         return $0
     }(UIButton(primaryAction: UIAction(handler: { _ in
         self.getMessage()
-        
-        
     })))
+    
+    lazy var disLabel: UILabel = {
+        $0.frame = CGRect(x: numCharSwitch.frame.maxX + 5, y: messagesButton.frame.maxY + 5, width: 300, height: 30)
+        $0.textColor = .white
+        $0.font = .systemFont(ofSize: 20, weight: .medium)
+        $0.textAlignment = .left
+        $0.text = "Character / Numeric Messages "
+        return $0
+    }(UILabel())
+    
+    lazy var numCharSwitch: UISwitch = {
+        $0.frame.origin = CGPoint(x: messagesButton.frame.minX, y: messagesButton.frame.maxY + 5)
+//        $0.backgroundColor = .systemOrange
+//        $0.onTintColor = .systemOrange
+//        $0.thumbTintColor = .white
+//        $0.onImage? = UIImage(systemName: "a.circle.fill")!
+//        $0.offImage = UIImage(systemName: "1.circle.fill")
+        $0.addAction(UIAction { [self] _ in charNumSwitchStatus = !charNumSwitchStatus }, for: .valueChanged)
+        return $0
+    }(UISwitch())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +69,8 @@ class SecondTabViewController: UIViewController {
         self.view.addSubview(viewMessage)
         self.view.addSubview(messageLabel)
         self.view.addSubview(messagesButton)
+        self.view.addSubview(numCharSwitch)
+        self.view.addSubview(disLabel)
         
   
         
@@ -61,7 +83,12 @@ class SecondTabViewController: UIViewController {
     
 // MARK: - Генератор случайных строк.
     func randomString(length: Int) -> String {
-      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-      return String((0..<length).map{ _ in letters.randomElement()! })
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let numbers = "0123456789"
+        if charNumSwitchStatus {
+            return String((0..<length).map{ _ in letters.randomElement()! })
+        } else {
+            return String((0..<length).map{ _ in numbers.randomElement()! })
+        }
     }
 }

@@ -8,11 +8,11 @@
 import UIKit
 
 class LabelView: UILabel {
-    init(font: UIFont = .systemFont(ofSize: 16, weight: .regular)) {
+    init(font: UIFont = .systemFont(ofSize: 16, weight: .regular), color: UIColor = .black) {
         super.init(frame: .zero)
         self.font = font
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.textColor = .blue
+        self.textColor = color
         self.numberOfLines = 0
     }
     

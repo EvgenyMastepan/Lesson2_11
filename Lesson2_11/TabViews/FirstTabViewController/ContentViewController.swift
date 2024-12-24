@@ -8,8 +8,9 @@
 import UIKit
 
 class ContentViewController: UIViewController, UIScrollViewDelegate {
-    
-    let ourIndent: CGFloat = 15
+    private var imageOriginPlace: CGPoint = .zero
+    private var imageScale: CGAffineTransform = .init(scaleX: 1, y: 1)
+    private let ourIndent: CGFloat = 15
     let data = Card.cards
     
     var numPage: Int
@@ -28,13 +29,19 @@ class ContentViewController: UIViewController, UIScrollViewDelegate {
     }(UIScrollView())
 
     lazy var topImage: UIImageView = {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapRecognize))
+        tapGesture.numberOfTapsRequired = 1
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
+        // Не срабатывает UITapGesture. Why?
+        $0.isUserInteractionEnabled = false
+        $0.addGestureRecognizer(tapGesture)
+        self.imageOriginPlace = $0.frame.origin
         return $0
     }(UIImageView())
     
-    lazy var magnificationLabel = LabelView(font: .systemFont(ofSize: 18, weight: .bold))
+    lazy var magnificationLabel = LabelView(font: .systemFont(ofSize: 18, weight: .bold), color: .white)
     
     lazy var scrollViewContent: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +66,7 @@ class ContentViewController: UIViewController, UIScrollViewDelegate {
         view.addSubview(magnificationLabel)
         magnificationLabel.text = "Magn.: 1"
         setupConstraint()
+//        centerImage()
     }
     
     func setContent() {
@@ -66,7 +74,14 @@ class ContentViewController: UIViewController, UIScrollViewDelegate {
         topImage.image = UIImage(named: content.userImage)
         
     }
-
+// MARK: - Попытка поставить картинку по центру Scroll, прокрутив его.
+//    func centerImage() {
+//        let centerOffsetX = (scrollView.contentSize.width - scrollView.frame.size.width / 2)
+//        let centerOffsetY = (scrollView.contentSize.height - scrollView.frame.size.height / 2)
+//        let centerPoint = CGPoint(x: centerOffsetX, y: centerOffsetY)
+//        scrollView.setContentOffset(centerPoint, animated: true)
+//    }
+    
     func setupConstraint() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -82,12 +97,11 @@ class ContentViewController: UIViewController, UIScrollViewDelegate {
             scrollViewContent.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
             topImage.topAnchor.constraint(equalTo: scrollViewContent.topAnchor),
-//            topImage.centerYAnchor.constraint(equalTo: scrollViewContent.centerYAnchor),
             topImage.leadingAnchor.constraint(equalTo: scrollViewContent.leadingAnchor),
             topImage.trailingAnchor.constraint(equalTo: scrollViewContent.trailingAnchor),
             topImage.heightAnchor.constraint(equalToConstant: 250),
             
-            magnificationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            magnificationLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
             magnificationLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             magnificationLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
             magnificationLabel.heightAnchor.constraint(equalToConstant: 25),
@@ -99,6 +113,16 @@ class ContentViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        magnificationLabel.text = "Magn.: " + String(Int(scale))
+        magnificationLabel.text = "Magn.: " + String(format: "%.2f", Double(scale))
+    }
+    
+    @objc func tapRecognize(sender: UITapGestureRecognizer) {
+        print("tap")
+        guard let senderView = sender.view else { return }
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            guard let self = self else { return }
+            senderView.transform = self.imageScale
+            senderView.frame.origin = self.imageOriginPlace
+        }
     }
 }
