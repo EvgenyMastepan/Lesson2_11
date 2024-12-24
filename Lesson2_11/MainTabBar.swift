@@ -18,7 +18,7 @@ class TabBarView: UITabBarController {
     // MARK: - Активация настроек ТабБар
     private func setTab() {
         tabBar.backgroundColor = .white
-        tabBar.tintColor = .systemMint
+        tabBar.tintColor = UIColor(named: "appCyan")
         tabBar.unselectedItemTintColor = .systemGray2
 
         let firstVC = settingTab(controllerName: FirstTabViewController(), imageName: "house", selImageName: "house.fill", titleString: "Sweet home")
